@@ -18,26 +18,7 @@ class Solution {
         int length = 0;
 
         ListNode t1 = head;
-
-        // while(t1!=null)
-        // {
-        //     length++;
-        //     t1 = t1.next;
-        // }
-
-        // t1 = head;
-
-        // if(length == 1 && t1.val!=val)
-        // {
-        //    return head; 
-        // }
-        // if(length == 2 && t1.val!=val)
-        // {
-        //     return head;
-        // }
         
-        
-
         while (temp!=null)
         {
             if (temp.val != val) 
@@ -47,9 +28,6 @@ class Solution {
             }
             temp = temp.next;
         }
-        // if (c.val == val) {
-        //     c.next = null;
-        // }
         c.next = null;
 
         return d1.next;
