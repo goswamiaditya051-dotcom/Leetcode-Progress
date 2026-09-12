@@ -1,9 +1,9 @@
 class Solution {
     public int[] sortArray(int[] arr) {
         int n = arr.length;
-       if(n==1) return arr;
-        int brr[] = new int[n/2];
-        int crr[] = new int[n-n/2];
+        if(n==1) return arr;
+        int[]brr = new int[n/2];
+        int[]crr = new int[n-n/2];
         int idx = 0;
         for(int i = 0; i<brr.length; i++)
         {
@@ -17,15 +17,12 @@ class Solution {
         sortArray(crr);
         merge(brr,crr,arr);
         return arr;
-    }
-    public int[] merge(int[]left,int[]right,int[]crr){
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        int m = left.length;
-        int n = right.length;
 
-        while(i<m && j<n)
+    }
+    public static int []merge(int[]left,int[]right,int[]crr){
+        int i = 0; int j = 0; int k = 0;
+
+        while(i<left.length && j<right.length)
         {
             if(left[i]<right[j])
             {
@@ -38,13 +35,13 @@ class Solution {
             }
             k++;
         }
-        while(i<m)
+        while(i<left.length)
         {
             crr[k] = left[i];
             i++;
             k++;
         }
-        while(j<n)
+        while(j<right.length)
         {
             crr[k] = right[j];
             j++;
