@@ -10,9 +10,13 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        
-        if(head==null|| head.next==null) return head;
 
+        if(head==null || head.next==null) return head;
+
+        ListNode d1 = new ListNode(-1);
+        ListNode c = d1;
+        ListNode temp = head;
+        
         ListNode slow = head;
         ListNode fast = head;
 
@@ -23,41 +27,46 @@ class Solution {
         }
         ListNode a = slow.next;
         slow.next = null;
-        ListNode t1 = head;
-        ListNode t2 = a;
 
-        ListNode right = sortList(t1);
-        ListNode left = sortList(t2);
-        ListNode combine = merge(right,left);
-        return combine;
-        
+        ListNode left = head;
+        ListNode right = a;
+
+        ListNode l = sortList(left);
+        ListNode r = sortList(right);
+        ListNode combine = merge(l,r);
+
+        return combine;   
+    
     }
-    public ListNode merge(ListNode head1,ListNode head2)
+    public static ListNode merge(ListNode left, ListNode right)
     {
-        ListNode a = head1;
-        ListNode b = head2;
         ListNode d1 = new ListNode(-1);
         ListNode c = d1;
-
-        while(a!=null && b!=null)
+        while(left!=null && right!=null)
         {
-            if(a.val<=b.val)
+            if(left.val<right.val)
             {
-                c.next = a;
-                a = a.next;
+                c.next = left;
+                left = left.next;
             }
             else{
-                c.next = b;
-                b = b.next;
+                c.next = right;
+                right = right.next;
             }
             c = c.next;
         }
-        if(a==null)
+
+        while(left!=null)
         {
-            c.next = b;
+            c.next = left;
+            left = left.next;
+            c = c.next;
         }
-        else{
-            c.next = a;
+         while(right!=null)
+        {
+            c.next = right;
+            right = right.next;
+            c = c.next;
         }
         return d1.next;
     }
