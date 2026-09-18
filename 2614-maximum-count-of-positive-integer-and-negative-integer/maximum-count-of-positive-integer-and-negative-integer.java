@@ -8,11 +8,11 @@ class Solution {
         int neg = 0;
         int pos = 0;
 
-        while (i <= j) {
+        while (i <= j) {// Finding the number of positives 
             int mid = (i + j) / 2;
             if (arr[mid] <= 0) {
                 i = mid + 1;
-            } else if (arr[mid] > 0) {
+            } else  {
                 j = mid - 1;
                 pos = n - mid;
             }
@@ -21,7 +21,7 @@ class Solution {
         i = 0;
         j = n - 1;
 
-        while (i <= j) {
+        while (i <= j) { // Finding the number of the negatives 
             int mid = (i + j) / 2;
 
             if (arr[mid] < 0) {
