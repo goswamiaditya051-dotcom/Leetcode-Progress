@@ -1,10 +1,12 @@
 class Solution {
     public int mySqrt(int x) {
-        long n = x;
-        for(long i = 0; i<=x; i++)
+        
+        // long n = x;
+        if(x==0) return 0;
+        for(int i = 1; i<=x; i++)
         {
-            if(i*i==n) return (int) i;
-            if(i*i>n) return (int) i-1;
+            if(i == ( x / i )) return i;
+            if(i > ( x / i) ) return i-1;
         }
         return -1;
     }
