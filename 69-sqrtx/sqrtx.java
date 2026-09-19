@@ -1,13 +1,23 @@
 class Solution {
     public int mySqrt(int x) {
-        
-        // long n = x;
-        if(x==0) return 0;
-        for(int i = 1; i<=x; i++)
-        {
-            if(i == ( x / i )) return i;
-            if(i > ( x / i) ) return i-1;
+        long i = 0;
+        long j = x;
+
+        while (i <= j) {
+            long mid = i + (j - i) / 2;
+            if (mid * mid == x ) 
+            {
+                return(int) mid;
+            }
+            else if(mid * mid < x)
+            {
+                i = mid+1;
+            }
+            else{
+                j = mid-1;
+            }
+
         }
-        return -1;
+        return (int)j;
     }
 }
