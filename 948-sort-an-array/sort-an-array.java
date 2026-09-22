@@ -1,58 +1,62 @@
 class Solution {
     public int[] sortArray(int[] arr) {
         
-       int n = arr.length;
-       if(n==1) return arr;
+        if(arr.length==1) return arr;
 
-       int[]brr = new int[n/2];
-       int[]crr = new int[n-n/2];
+        int n = arr.length;
 
-       int idx = 0;
+        int[]a = new int[n/2];
+        int[]b = new int[n-n/2];
 
-       for(int i = 0; i<brr.length; i++)
+        int idx = 0;
+
+        for(int i = 0; i<a.length; i++)
         {
-            brr[i] = arr[idx++];
+            a[i] = arr[idx++];
         }
 
-        for(int j = 0; j<crr.length; j++)
+        for(int i = 0; i<b.length; i++)
         {
-            crr[j] = arr[idx++];
+            b[i] = arr[idx++];
         }
 
-        sortArray(brr);
-        sortArray(crr);
-        merge(brr,crr,arr);
+        sortArray(a);
+        sortArray(b);
+        merge(a,b,arr);
         return arr;
     }
-    public static int[]merge(int[]left,int[]right,int[]crr )
+    public static int[] merge(int[]left,int[]right,int[]arr)
     {
         int i = 0;
         int j = 0;
         int k = 0;
 
-        while(i<left.length && j<right.length)
+        while(i<left.length && j<right.length )
         {
             if(left[i]<right[j])
             {
-                crr[k] = left[i];
+                arr[k] = left[i];
                 i++;
             }
             else{
-                crr[k] = right[j];
+                arr[k] = right[j];
                 j++;
             }
             k++;
         }
-        while(i<left.length){
-            crr[k] = left[i];
+        while(i<left.length)
+        {
+            arr[k] = left[i];
             i++;
             k++;
         }
-        while(j<right.length){
-            crr[k] = right[j];
+        while(j<right.length)
+        {
+            arr[k] = right[j];
             j++;
             k++;
         }
-        return crr;
+
+        return arr;
     }
 }
