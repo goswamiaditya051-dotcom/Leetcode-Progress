@@ -2,36 +2,32 @@ class Solution {
     public int[] sortArray(int[] arr) {
         
         if(arr.length==1) return arr;
-
         int n = arr.length;
-
-        int[]a = new int[n/2];
-        int[]b = new int[n-n/2];
+        int a[] = new int[n/2];
+        int b[] = new int[n-n/2];
 
         int idx = 0;
-
         for(int i = 0; i<a.length; i++)
         {
             a[i] = arr[idx++];
         }
 
-        for(int i = 0; i<b.length; i++)
+        for(int j = 0; j<b.length; j++)
         {
-            b[i] = arr[idx++];
-        }
+            b[j] = arr[idx++];
+        }        
 
         sortArray(a);
         sortArray(b);
-        merge(a,b,arr);
-        return arr;
+        return merge(a,b,arr);
+
     }
-    public static int[] merge(int[]left,int[]right,int[]arr)
-    {
+    public static int [] merge(int[]left ,int[]right,int[] arr){
         int i = 0;
         int j = 0;
         int k = 0;
 
-        while(i<left.length && j<right.length )
+        while(i < left.length && j < right.length )
         {
             if(left[i]<right[j])
             {
@@ -56,7 +52,6 @@ class Solution {
             j++;
             k++;
         }
-
         return arr;
     }
 }
