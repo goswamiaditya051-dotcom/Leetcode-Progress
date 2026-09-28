@@ -11,33 +11,30 @@
 class Solution {
     public ListNode oddEvenList(ListNode head) {
         ListNode d1 = new ListNode(-1);
+        ListNode c = d1;
         ListNode d2 = new ListNode(-1);
-        ListNode a = d1;
-        ListNode b = d2;
-        ListNode i = head;
+        ListNode d = d2;
         int idx = 0;
-        while (i != null) 
+
+        ListNode a = head;
+
+        while(a!=null)
         {
-            if(idx%2!=0)
+            if(idx%2==0)
             {
-                a.next = i;
+                c.next = a;
                 a = a.next;
-                idx++;
+                c = c.next;
             }
             else{
-                b.next = i;
-                b = b.next;
-                idx++;
+                d.next = a;
+                a = a.next;
+                d = d.next;
             }
-            i = i.next;
-
-            
+            idx++;
         }
-        // b.next = null;
-        // a.next = d2.next;
-        // return d1.next;
-        a.next=null;
-        b.next = d1.next;
-        return d2.next;
+        c.next = d2.next;
+        d.next = null;
+        return d1.next;
     }
 }
