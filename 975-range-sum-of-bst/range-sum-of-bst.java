@@ -19,7 +19,7 @@ class Solution {
     List<Integer> list = new ArrayList<>();
     dfs(root,p,q,list);
     int sum = 0;
-    
+
     for(int ele : list)
     {
         sum = sum + ele;
@@ -34,7 +34,8 @@ class Solution {
         {
             list.add(root.val);
         }
-        dfs(root.left,p,q,list);
-        dfs(root.right,p,q,list);
+        if(root.val>=p) dfs(root.left,p,q,list);
+        if(root.val<=q) dfs(root.right,p,q,list);
+       
     }
 }
