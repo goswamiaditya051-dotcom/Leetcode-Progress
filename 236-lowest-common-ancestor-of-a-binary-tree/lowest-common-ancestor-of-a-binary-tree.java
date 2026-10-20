@@ -12,23 +12,25 @@ class Solution {
     static ArrayList<TreeNode> b;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
-        ArrayList<TreeNode> arr = new ArrayList<>();
-        dfs(root,arr,p,q);
+        ArrayList<TreeNode> list = new ArrayList<>();
+        
+        dfs(root,p,q,list);
 
         int i = 0;
-        while(i<a.size() && i<b.size() && a.get(i)==b.get(i))
+        while(i<a.size() && i<b.size() && a.get(i) == b.get(i))
         {
             i++;
         }
         return a.get(i-1);
+        
     }
-    public static void dfs(TreeNode root,ArrayList<TreeNode> arr,TreeNode p,TreeNode q){
-        if(root==null ) return;
-        arr.add(root);
-        if(root==p) a = new ArrayList(arr);
-        if(root==q) b = new ArrayList(arr);
-        dfs(root.left,arr,p,q);
-        dfs(root.right,arr,p,q);
-        arr.remove(arr.size()-1);
+    public static void dfs(TreeNode root,TreeNode p,TreeNode q,ArrayList<TreeNode> list){
+        if(root==null) return;
+        list.add(root);
+        if(p==root) a = new ArrayList<>(list);
+        if(q==root) b = new ArrayList<>(list);
+        dfs(root.left,p,q,list);
+        dfs(root.right,p,q,list);
+        list.remove(list.size()-1);
     }
 }
