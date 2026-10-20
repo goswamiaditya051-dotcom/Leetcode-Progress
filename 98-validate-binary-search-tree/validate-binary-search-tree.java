@@ -19,20 +19,25 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         dfs(root,list);
 
-        int[] arr = new int[list.size()];
+        // int[] arr = new int[list.size()];
 
-        for(int i = 0; i<arr.length; i++)
-        {
-            arr[i] = list.get(i);
-        }
+        // for(int i = 0; i<arr.length; i++)
+        // {
+        //     arr[i] = list.get(i);
+        // }
 
-        int i = 0;
-        int j = 1;
-        while(i<arr.length && j<arr.length)
+        // int i = 0;
+        // int j = 1;
+        // while(i<arr.length && j<arr.length)
+        // {
+        //     if(arr[i]>=arr[j]) return false;
+        //     i++;
+        //     j++;
+        // }
+
+        for(int i = 0; i<list.size()-1; i++)
         {
-            if(arr[i]>=arr[j]) return false;
-            i++;
-            j++;
+            if(list.get(i)>=list.get(i+1)) return false;
         }
         return true;
         
