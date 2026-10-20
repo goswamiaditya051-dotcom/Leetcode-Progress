@@ -14,28 +14,26 @@
  * }
  */
 class Solution {
-    public int rangeSumBST(TreeNode root, int p, int q) {
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        int sum = 0;
+        List<Integer> list = new ArrayList<>();
 
-    List<Integer> list = new ArrayList<>();
-    dfs(root,p,q,list);
-    int sum = 0;
+        sum(root,low,high,list);
 
-    for(int ele : list)
-    {
-        sum = sum + ele;
-    }
-
-    return sum;
+        for(int i = 0; i<list.size(); i++)
+        {
+            sum = sum + list.get(i);
+        }
         
+        return sum;
     }
-    public static void dfs(TreeNode root,int p,int q, List<Integer> list){
-        if(root==null) return;
-        if(root.val >= p && root.val <= q)
+    public static void sum(TreeNode root,int low,int high,List<Integer> list){
+        if(root==null )return;
+        if(root.val<=high && root.val>=low)
         {
             list.add(root.val);
         }
-        if(root.val>=p) dfs(root.left,p,q,list);
-        if(root.val<=q) dfs(root.right,p,q,list);
-       
+        if(root.val<=high)  sum(root.right,low,high,list);
+        if(root.val>=low)  sum(root.left,low,high,list);
     }
 }
