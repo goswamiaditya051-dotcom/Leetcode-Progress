@@ -10,51 +10,55 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        ListNode d1 = new ListNode(-1);
+        if (head == null)
+            return;
         ListNode slow = head;
         ListNode fast = head;
-        while(fast!=null && fast.next!=null)
-        {
+
+        ListNode d1 = new ListNode(-1);
+        ListNode c = d1;
+
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        ListNode a = slow.next;
+        ListNode n = slow.next;
         slow.next = null;
 
-        a = reverse(a);
         ListNode t1 = head;
-        ListNode t2 = a;
-
-        while(t1!=null && t2!=null)
-        {
+        ListNode t2 = reverse(n);
+        while (t2 != null) {
             {
-                d1.next = t1;
+                c.next = t1;
                 t1 = t1.next;
-                d1 = d1.next;
+                c = c.next;
             }
-
             {
-                d1.next = t2;
+                c.next = t2;
                 t2 = t2.next;
-                d1 = d1.next;
+                c = c.next;
             }
         }
-        if(t1==null)
-        {
-            d1.next = t2;
+        if (t1 != null) {
+            c.next = t1;
+            t1 = t1.next;
+            c = c.next;
         }
-        else{
-            d1.next = t1;
+        if (t2 != null) {
+            c.next = t2;
+            t2 = t2.next;
+            c = c.next;
         }
+
     }
-    public ListNode reverse(ListNode head)
-    {
-        ListNode curr = head;
+
+    public static ListNode reverse(ListNode head) {
         ListNode prev = null;
+        ListNode curr = head;
         ListNode fwd = null;
-        while(curr!=null)
-        {
+
+        while (curr != null) {
             fwd = curr.next;
             curr.next = prev;
             prev = curr;
