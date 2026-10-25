@@ -11,26 +11,33 @@ class Solution {
     static ArrayList<TreeNode> a;
     static ArrayList<TreeNode> b;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-
-        ArrayList<TreeNode> list = new ArrayList<>();
+        ArrayList<TreeNode> arr = new ArrayList<>();
+        dfs(root,p,q,arr);
         
-        dfs(root,p,q,list);
-
         int i = 0;
-        while(i<a.size() && i<b.size() && a.get(i) == b.get(i))
+        while(i<a.size() && i<b.size() && a.get(i)==b.get(i))
         {
-            i++;
+           i++;
         }
+
         return a.get(i-1);
-        
+
     }
-    public static void dfs(TreeNode root,TreeNode p,TreeNode q,ArrayList<TreeNode> list){
+    public static void dfs(TreeNode root,TreeNode p,TreeNode q,ArrayList<TreeNode> arr)
+    {
         if(root==null) return;
-        list.add(root);
-        if(p==root) a = new ArrayList<>(list);
-        if(q==root) b = new ArrayList<>(list);
-        dfs(root.left,p,q,list);
-        dfs(root.right,p,q,list);
-        list.remove(list.size()-1);
+        arr.add(root);
+        if(root.val==p.val)
+        {
+            a = new ArrayList<>(arr);
+        }
+        if(root.val==q.val)
+        {
+            b = new ArrayList<>(arr);
+        }
+        dfs(root.left,p,q,arr);
+        dfs(root.right,p,q,arr);
+        arr.remove(arr.size()-1);
+        
     }
 }
