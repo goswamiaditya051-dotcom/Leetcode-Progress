@@ -15,25 +15,32 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        List<TreeNode> list = new ArrayList<>();
+        //List<TreeNode> list = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<>();
+        Stack<TreeNode> helper = new Stack<>();
         TreeNode d1 = new TreeNode(-1);
         TreeNode c = d1;
-        dfs(root,list);
+        dfs(root,st);
 
-        for(int i = 0; i<list.size(); i++)
+        while(st.size()>0)
         {
-            c.right = list.get(i);
-            c=c.right;
+           helper.push(st.pop());
+        }
+        int n = helper.size();
+        for(int i = 0; i<n; i++)
+        {
+            c.right = helper.peek();
+            helper.pop();
             c.left = null;
+            c = c.right;
         }
         
 
     }
-    public static void dfs(TreeNode root,List<TreeNode> list){
+    public static void dfs(TreeNode root,Stack<TreeNode> st){
         if(root==null) return;
-        
-        list.add(root);
-        dfs(root.left,list);
-        dfs(root.right,list);
+        st.push(root);
+        dfs(root.left,st);
+        dfs(root.right,st);
     }
 }
