@@ -15,15 +15,14 @@
  */
 class Solution {
     public TreeNode sortedArrayToBST(int[] arr) {
-        
         return helper(0,arr.length-1,arr);
     }
-    public static TreeNode helper(int i,int j,int[]arr){
+    public static TreeNode helper(int i,int j,int []arr){
         if(i>j) return null;
-        int mid = i+(j-i)/2;
+        int mid = (i+j)/2;
         TreeNode root = new TreeNode(arr[mid]);
         root.left =  helper(i,mid-1,arr);
-        root.right = helper(mid+1,j,arr);
+        root.right =  helper(mid+1,j,arr);
         return root;
     }
 }
