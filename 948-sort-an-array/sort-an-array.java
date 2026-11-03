@@ -1,57 +1,46 @@
 class Solution {
-    public int[] sortArray(int[] arr) {
-        
-        if(arr.length==1) return arr;
+      public int[] sortArray(int[] arr) {
         int n = arr.length;
-        int a[] = new int[n/2];
-        int b[] = new int[n-n/2];
-
+        // Fix 1: Handle both empty arrays and single-element arrays
+        if (n <= 1) return arr; 
+        
         int idx = 0;
-        for(int i = 0; i<a.length; i++)
-        {
+        int[] a = new int[n / 2];
+        int[] b = new int[n - n / 2];
+
+        for (int i = 0; i < a.length; i++) {
             a[i] = arr[idx++];
         }
-
-        for(int j = 0; j<b.length; j++)
-        {
+        for (int j = 0; j < b.length; j++) {
             b[j] = arr[idx++];
-        }        
-
+        }
+        
         sortArray(a);
         sortArray(b);
-        return merge(a,b,arr);
+        merge(a, b, arr);
 
+        return arr;
     }
-    public static int [] merge(int[]left ,int[]right,int[] arr){
-        int i = 0;
-        int j = 0;
-        int k = 0;
 
-        while(i < left.length && j < right.length )
-        {
-            if(left[i]<right[j])
-            {
-                arr[k] = left[i];
-                i++;
+    public static int[] merge(int[] a, int[] b, int[] arr) {
+        int i = 0, j = 0, k = 0;
+
+        while (i < a.length && j < b.length) {
+            if (a[i] < b[j]) {
+                arr[k++] = a[i++];
+            } else {
+                arr[k++] = b[j++];
             }
-            else{
-                arr[k] = right[j];
-                j++;
-            }
-            k++;
         }
-        while(i<left.length)
-        {
-            arr[k] = left[i];
-            i++;
-            k++;
+
+        // Fix 2: Changed from 'if' to 'while' to safely copy all remaining elements
+        while (i < a.length) {
+            arr[k++] = a[i++];
         }
-        while(j<right.length)
-        {
-            arr[k] = right[j];
-            j++;
-            k++;
+        while (j < b.length) {
+            arr[k++] = b[j++];
         }
+        
         return arr;
     }
 }
