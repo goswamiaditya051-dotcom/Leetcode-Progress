@@ -1,7 +1,7 @@
 class Solution {
     public boolean isValid(String s) {
-
         Stack<Character> st = new Stack<>();
+        // push openeing brackets onto the stack
 
         for(int i = 0; i<s.length(); i++)
         {
@@ -9,11 +9,13 @@ class Solution {
             if(ch=='(' || ch=='[' || ch=='{')
             {
                 st.push(ch);
+                
             }
+            
             else{
                 if(st.size()==0) return false;
-                char open = st.peek();
-                if(isvalidpair(open,ch))
+                char dh = st.peek();
+                if(isValidPair(dh,ch))
                 {
                     st.pop();
                 }
@@ -21,12 +23,12 @@ class Solution {
             }
         }
         if(st.size()==0) return true;
-        return false;
+            return false;
     }
-    public static boolean isvalidpair(char open,char close){
-        if(open=='(' && close ==')') return true;
-        if(open=='{' && close =='}') return true;
-        if(open=='[' && close ==']') return true;
+    public static boolean isValidPair(char a,char b){
+        if(a=='(' && b== ')') return true;
+        if(a=='[' && b== ']') return true;
+        if(a=='{' && b== '}') return true;
         return false;
     }
 }
