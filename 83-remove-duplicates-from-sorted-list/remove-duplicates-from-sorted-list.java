@@ -11,20 +11,25 @@
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if(head==null) return head;
-        ListNode slow = head;
-        ListNode fast = head;
-        while(fast!=null)
-        {
-            if(slow.val==fast.val)
+        ListNode i = head;
+        ListNode j = head;
+
+        while(j!=null){
+            if(i.val==j.val)
             {
-                fast = fast.next;
+                j = j.next;
             }
             else{
-                slow.next = fast;
-                slow = fast;
+
+                i.next = j;
+                i = j;
+                j = j.next;
             }
         }
-        slow.next = null;
+        i.next = j;
+
         return head;
+
+        
     }
 }
