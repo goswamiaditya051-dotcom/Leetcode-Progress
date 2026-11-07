@@ -14,51 +14,50 @@
  * }
  */
 class Solution {
-    class pair{
-        TreeNode node;
+    class Pair{
         int level;
+        TreeNode node;
 
-        pair(TreeNode node,int level){
-            this.node = node;
+        Pair(int level,TreeNode node){
             this.level = level;
+            this.node = node;
         }
     }
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-
         List<List<Integer>> list = new ArrayList<>();
 
         int l = level(root);
 
-        for(int i = 1; i<=l; i++)
+        for(int i = 0; i<l; i++)
         {
             list.add(new ArrayList<>());
         }
+        Queue<Pair> q = new LinkedList<>();
+        if(root!=null) q.add(new Pair(0,root));
 
-        Queue<pair> q = new LinkedList<>();
-
-        if(root!=null) q.add(new pair(root,0));
         while(q.size()>0)
         {
-            pair front = q.remove();
-            TreeNode node = front.node;
+            Pair front = q.remove();
             int level = front.level;
+            TreeNode node = front.node;
             list.get(level).add(node.val);
-            if(node.left!=null) q.add(new pair(node.left,level+1));
-            if(node.right!=null)q.add(new pair(node.right,level+1));
-            
+            if(node.left!=null) q.add(new Pair(level+1,node.left));
+            if(node.right!=null)q.add(new Pair(level+1,node.right));
         }
 
         for(int i = 0; i<list.size(); i++)
         {
-            if(i%2!=0) Collections.reverse(list.get(i));
+            if(i%2!=0)
+            {
+                Collections.reverse(list.get(i));
+            }
         }
+
         return list;
         
     }
-    private int level(TreeNode root)
-    {
+    public static int level(TreeNode root){
         if(root==null) return 0;
-        return 1 + (Math.max(level(root.left),level(root.right)));
-        
+        return 1 + Math.max( level(root.left) , level(root.right));
     }
 }
