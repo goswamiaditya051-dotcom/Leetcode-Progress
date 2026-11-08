@@ -16,19 +16,18 @@
 class Solution {
     static boolean flag;
     public boolean isBalanced(TreeNode root) {
-        
-        if(root==null)return true;
-        flag=true;
-        levels(root);
+        if(root==null) return true;
+        flag = true;
+        level(root);
         return flag;
-
     }
-    public static int levels(TreeNode root){
+    public static int level(TreeNode root){
         if(root==null) return 0;
-        int leftlevel = levels(root.left);
-        int rightlevel = levels(root.right);
 
-        if(Math.abs(leftlevel-rightlevel)>1) flag = false;
-        return 1+ Math.max(leftlevel,rightlevel);
+        int leftlevel = level(root.left);
+        int rightlevel = level(root.right);
+        int level1 = Math.abs(leftlevel-rightlevel);
+        if( level1 > 1 ) flag = false;
+        return 1 + Math.max(leftlevel,rightlevel);
     }
 }
