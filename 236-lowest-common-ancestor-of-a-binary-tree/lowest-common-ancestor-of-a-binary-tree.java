@@ -8,18 +8,27 @@
  * }
  */
 class Solution {
-    static boolean flag;
+    static ArrayList<TreeNode> a;
+    static ArrayList<TreeNode> b;
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return dfs(root,p,q);
+        ArrayList<TreeNode> arr = new ArrayList<>();
+        dfs(root,p,q,arr);
+
+        int i = 0;
+        while( i<a.size() && i<b.size() && a.get(i) == b.get(i) ) i++;
+        {
+            return a.get(i-1);
+        }
+        // return null;
     }
-    public static TreeNode dfs(TreeNode root,TreeNode p,TreeNode q){
-        if(root==null) return root;
-        if( root==p || root == q) return root;
-        TreeNode left = dfs(root.left,p,q);
-        TreeNode right = dfs(root.right,p,q);
-        if(left!=null && right!=null ) return root;
-        if(right!=null && left==null ) return right;
-        if(left!=null && right==null)  return left;
-        return null;
+    public static void dfs(TreeNode root, TreeNode p,TreeNode q,ArrayList<TreeNode> arr ){
+        if(root==null) return;
+        arr.add(root);
+        if(root == p ) a = new ArrayList<>(arr);
+        if(root == q) b = new ArrayList<>(arr);
+        dfs(root.left,p,q,arr);
+        dfs(root.right,p,q,arr);
+        arr.remove(arr.size()-1);
     }
 }
