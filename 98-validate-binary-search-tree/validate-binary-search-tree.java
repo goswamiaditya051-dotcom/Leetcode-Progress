@@ -17,24 +17,15 @@ class Solution {
     public boolean isValidBST(TreeNode root) {
         ArrayList<Integer> list = new ArrayList<>();
         dfs(root,list);
-        boolean flag = false;
-        int i = 0;
-        int j = 1;
+       
         if(list.size()==1) return true;
-        while(i<list.size() && j<list.size())
+
+        for(int i = 1; i<list.size(); i++)
         {
-            if(list.get(i) < list.get(j))
-            {
-                flag = true;
-            }
-            else{
-                flag = false;
-                break;
-            }
-            i++;
-            j++;
+            if(list.get(i-1)>=list.get(i)) return false;
         }
-        return flag;
+
+        return true;
 
     }   
     public void dfs(TreeNode root,ArrayList<Integer> list){
