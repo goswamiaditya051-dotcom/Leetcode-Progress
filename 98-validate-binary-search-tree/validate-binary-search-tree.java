@@ -15,22 +15,32 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        if(root==null) return true;
-        if(root.val <= max(root.left) || root.val >= min(root.right) ) return false;
-        return isValidBST(root.left) && isValidBST(root.right);
-    }
-    public long max(TreeNode root){
-        if(root==null) return Long.MIN_VALUE;
-        long leftmax = max(root.left);
-        long rightmax = max(root.right);
-        long val = root.val;
-        return Math.max(val,Math.max(leftmax,rightmax));
-    }
-    public long min(TreeNode root){
-        if(root==null) return Long.MAX_VALUE;
-        long leftmin = min(root.left);
-        long rightmin = min(root.right);
-        long val = root.val;
-        return Math.min(val,Math.min(leftmin,rightmin));
+        ArrayList<Integer> list = new ArrayList<>();
+        dfs(root,list);
+        boolean flag = false;
+        int i = 0;
+        int j = 1;
+        if(list.size()==1) return true;
+        while(i<list.size() && j<list.size())
+        {
+            if(list.get(i) < list.get(j))
+            {
+                flag = true;
+            }
+            else{
+                flag = false;
+                break;
+            }
+            i++;
+            j++;
+        }
+        return flag;
+
+    }   
+    public void dfs(TreeNode root,ArrayList<Integer> list){
+        if(root==null) return;
+        dfs(root.left,list);
+        list.add(root.val);
+        dfs(root.right,list);
     }
 }
