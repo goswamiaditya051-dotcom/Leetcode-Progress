@@ -15,38 +15,22 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        
-        List<Integer> list = new ArrayList<>();
-        dfs(root,list);
-
-        // int[] arr = new int[list.size()];
-
-        // for(int i = 0; i<arr.length; i++)
-        // {
-        //     arr[i] = list.get(i);
-        // }
-
-        // int i = 0;
-        // int j = 1;
-        // while(i<arr.length && j<arr.length)
-        // {
-        //     if(arr[i]>=arr[j]) return false;
-        //     i++;
-        //     j++;
-        // }
-
-        for(int i = 0; i<list.size()-1; i++)
-        {
-            if(list.get(i)>=list.get(i+1)) return false;
-        }
-        return true;
-        
-
+        if(root==null) return true;
+        if(root.val <= max(root.left) || root.val >= min(root.right) ) return false;
+        return isValidBST(root.left) && isValidBST(root.right);
     }
-    public static void dfs(TreeNode root ,List<Integer> list){
-        if(root==null) return;
-        dfs(root.left,list);
-        list.add(root.val);
-        dfs(root.right,list);
+    public long max(TreeNode root){
+        if(root==null) return Long.MIN_VALUE;
+        long leftmax = max(root.left);
+        long rightmax = max(root.right);
+        long val = root.val;
+        return Math.max(val,Math.max(leftmax,rightmax));
+    }
+    public long min(TreeNode root){
+        if(root==null) return Long.MAX_VALUE;
+        long leftmin = min(root.left);
+        long rightmin = min(root.right);
+        long val = root.val;
+        return Math.min(val,Math.min(leftmin,rightmin));
     }
 }
